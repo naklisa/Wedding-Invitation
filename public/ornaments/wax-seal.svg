@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <!-- Outer glowing rings -->
+  <circle cx="80" cy="80" r="76" stroke="url(#sealGold)" stroke-width="1.5" opacity="0.8" />
+  <circle cx="80" cy="80" r="72" stroke="url(#sealGold)" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.6" />
+  <circle cx="80" cy="80" r="62" stroke="url(#sealGold)" stroke-width="2" />
+  <circle cx="80" cy="80" r="58" stroke="url(#sealGold)" stroke-width="1" opacity="0.5" />
+
+  <!-- Laurel Wreath Leaves (Left) -->
+  <g stroke="url(#sealGold)" stroke-width="1.2" fill="url(#sealGold)" fill-opacity="0.3">
+    <path d="M40 90 C36 82 36 74 42 66 C44 72 45 80 40 90 Z" />
+    <path d="M44 65 C42 57 44 50 52 44 C53 51 52 58 44 65 Z" />
+    <path d="M54 44 C54 36 58 30 68 28 C67 35 64 41 54 44 Z" />
+  </g>
+
+  <!-- Laurel Wreath Leaves (Right) -->
+  <g stroke="url(#sealGold)" stroke-width="1.2" fill="url(#sealGold)" fill-opacity="0.3">
+    <path d="M120 90 C124 82 124 74 118 66 C116 72 115 80 120 90 Z" />
+    <path d="M116 65 C118 57 116 50 108 44 C107 51 108 58 116 65 Z" />
+    <path d="M106 44 C106 36 102 30 92 28 C93 35 96 41 106 44 Z" />
+  </g>
+
+  <!-- Monogram Initials "D & F" -->
+  <text x="80" y="78" font-family="'Cinzel', serif" font-size="28" font-weight="600" fill="url(#sealGold)" text-anchor="middle" letter-spacing="2">D&amp;F</text>
+  <text x="80" y="100" font-family="'Cinzel', serif" font-size="10" font-weight="400" fill="url(#sealGold)" text-anchor="middle" letter-spacing="4">16.01.27</text>
+
+  <!-- Star accents -->
+  <circle cx="80" cy="38" r="2.5" fill="url(#sealGold)" />
+  <circle cx="80" cy="118" r="2" fill="url(#sealGold)" />
+
+  <defs>
+    <linearGradient id="sealGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff4ce" />
+      <stop offset="30%" stop-color="#e8be56" />
+      <stop offset="60%" stop-color="#b8861d" />
+      <stop offset="100%" stop-color="#ffd978" />
+    </linearGradient>
+  </defs>
+</svg>

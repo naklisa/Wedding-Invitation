@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" fill="none">
+  <!-- Elegant Royal Botanical Filigree Divider -->
+  <g stroke="url(#goldGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Center Jewel / Flower -->
+    <path d="M150 35 C142 45 142 55 150 65 C158 55 158 45 150 35 Z" fill="url(#goldGrad)" fill-opacity="0.3"/>
+    <circle cx="150" cy="50" r="4" fill="url(#goldGrad)"/>
+    <circle cx="150" cy="50" r="8" stroke="url(#goldGrad)" stroke-dasharray="2 3"/>
+
+    <!-- Left Flourish -->
+    <path d="M140 50 C120 50 105 38 85 45 C70 50 60 62 40 50 C30 44 20 50 5 50" />
+    <path d="M135 46 C115 42 105 28 92 36 C82 44 95 55 85 58 C75 60 70 52 60 51" opacity="0.7"/>
+    <!-- Left Leaves -->
+    <path d="M110 40 C114 30 126 34 122 43 C118 46 113 44 110 40 Z" fill="url(#goldGrad)" fill-opacity="0.4"/>
+    <path d="M75 48 C72 38 84 35 83 45 Z" fill="url(#goldGrad)" fill-opacity="0.4"/>
+    <circle cx="5" cy="50" r="2.5" fill="url(#goldGrad)"/>
+
+    <!-- Right Flourish (Mirrored) -->
+    <path d="M160 50 C180 50 195 38 215 45 C230 50 240 62 260 50 C270 44 280 50 295 50" />
+    <path d="M165 46 C185 42 195 28 208 36 C218 44 205 55 215 58 C225 60 230 52 240 51" opacity="0.7"/>
+    <!-- Right Leaves -->
+    <path d="M190 40 C186 30 174 34 178 43 C182 46 187 44 190 40 Z" fill="url(#goldGrad)" fill-opacity="0.4"/>
+    <path d="M225 48 C228 38 216 35 217 45 Z" fill="url(#goldGrad)" fill-opacity="0.4"/>
+    <circle cx="295" cy="50" r="2.5" fill="url(#goldGrad)"/>
+  </g>
+
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fcedc7" />
+      <stop offset="35%" stop-color="#d4af37" />
+      <stop offset="70%" stop-color="#aa7c11" />
+      <stop offset="100%" stop-color="#fcedc7" />
+    </linearGradient>
+  </defs>
+</svg>

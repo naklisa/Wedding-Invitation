@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #6e4653;
+    --foreground: #ffffff;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: #2b1820;
+    color: #ffffff;
+    font-family: var(--font-jakarta), sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Luxurious Gradient Text (Metallic Gold) */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #fff7d6 0%, #eac265 40%, #c49430 75%, #fff2be 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #eeddac 0%,
+    #ffffff 25%,
+    #e3c577 50%,
+    #ffffff 75%,
+    #eeddac 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Luxurious Glassmorphism & Depth Cards */
+.luxury-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(140, 101, 114, 0.25) 50%,
+    rgba(43, 24, 32, 0.5) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(246, 237, 213, 0.28);
+  box-shadow: 
+    0 15px 35px -10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.luxury-card-gold {
+  background: linear-gradient(
+    145deg,
+    rgba(212, 175, 55, 0.12) 0%,
+    rgba(60, 35, 45, 0.7) 100%
+  );
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(234, 194, 101, 0.4);
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.7),
+    0 0 20px -5px rgba(212, 175, 55, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.glass-pill {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(246, 237, 213, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.glass-pill:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: rgba(246, 237, 213, 0.6);
+}
+
+/* Arch frame shape with dual gold filigree borders and realistic shadow */
+.royal-arch-frame {
+  border-radius: 240px 240px 16px 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    0 0 30px -5px rgba(212, 175, 55, 0.25);
+  border: 2px solid rgba(246, 237, 213, 0.6);
+}
+
+.royal-arch-frame::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 234px 234px 10px 10px;
+  border: 1px solid rgba(246, 237, 213, 0.35);
+  pointer-events: none;
+}
+
+/* Falling Petals Animation */
+@keyframes petalFall {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg) translateX(0);
+  }
+  15% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(30px);
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(105vh) rotate(360deg) translateX(-20px);
+  }
+}
+
+.animate-petal {
+  animation: petalFall linear infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #2b1820;
+}
+::-webkit-scrollbar-thumb {
+  background: #9e7583;
+  border-radius: 3px;
+}

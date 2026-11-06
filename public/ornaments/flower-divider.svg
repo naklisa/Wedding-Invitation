@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Center flower -->
+  <circle cx="60" cy="20" r="3" fill="currentColor" opacity="0.8"/>
+  <path d="M60,14 C58,16 58,18 60,20 C62,18 62,16 60,14 Z" opacity="0.7"/>
+  <path d="M60,26 C58,24 58,22 60,20 C62,22 62,24 60,26 Z" opacity="0.7"/>
+  <path d="M54,20 C56,18 58,18 60,20 C58,22 56,22 54,20 Z" opacity="0.7"/>
+  <path d="M66,20 C64,18 62,18 60,20 C62,22 64,22 66,20 Z" opacity="0.7"/>
+  <!-- Left stem & leaves -->
+  <path d="M54,20 Q35,20 10,20" opacity="0.6"/>
+  <path d="M42,20 C40,16 43,13 46,15 C47,17 45,19 42,20 Z" opacity="0.6"/>
+  <path d="M28,20 C26,24 29,27 32,25 C33,23 31,21 28,20 Z" opacity="0.6"/>
+  <circle cx="10" cy="20" r="1.5" fill="currentColor" opacity="0.7"/>
+  <!-- Right stem & leaves -->
+  <path d="M66,20 Q85,20 110,20" opacity="0.6"/>
+  <path d="M78,20 C80,16 77,13 74,15 C73,17 75,19 78,20 Z" opacity="0.6"/>
+  <path d="M92,20 C94,24 91,27 88,25 C87,23 89,21 92,20 Z" opacity="0.6"/>
+  <circle cx="110" cy="20" r="1.5" fill="currentColor" opacity="0.7"/>
+</svg>

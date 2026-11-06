@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="600" viewBox="0 0 60 600" fill="none">
+  <!-- Elegant Vertical Side Vine / Creeping Botanical Leaves -->
+  <g stroke="url(#vineGold)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6">
+    <!-- Main stem undulating along the edge -->
+    <path d="M10 0 C25 60 5 120 20 180 C32 230 10 280 22 340 C35 400 8 460 20 520 C28 560 12 590 15 600" />
+    <path d="M10 0 C20 70 8 130 18 190 C28 240 12 290 20 350 C30 410 10 470 18 530" stroke-width="0.6" stroke-dasharray="2 4" opacity="0.5" />
+
+    <!-- Leaf cluster 1 (Y: 50) -->
+    <path d="M16 45 C32 40 38 52 22 55 Z" fill="url(#vineGold)" fill-opacity="0.25" />
+    <circle cx="36" cy="46" r="2" fill="url(#vineGold)" />
+
+    <!-- Leaf cluster 2 (Y: 110) -->
+    <path d="M9 105 C2 95 12 85 16 100 Z" fill="url(#vineGold)" fill-opacity="0.25" />
+    <path d="M12 115 C26 112 32 125 18 128 Z" fill="url(#vineGold)" fill-opacity="0.25" />
+
+    <!-- Leaf cluster 3 (Y: 180) -->
+    <path d="M20 175 C38 168 44 182 26 186 Z" fill="url(#vineGold)" fill-opacity="0.3" />
+    <circle cx="42" cy="176" r="2.5" fill="url(#vineGold)" />
+
+    <!-- Leaf cluster 4 (Y: 240) -->
+    <path d="M15 235 C5 225 16 215 22 230 Z" fill="url(#vineGold)" fill-opacity="0.25" />
+    <path d="M18 245 C34 240 40 252 24 256 Z" fill="url(#vineGold)" fill-opacity="0.25" />
+
+    <!-- Leaf cluster 5 (Y: 310) -->
+    <path d="M17 305 C32 300 38 312 23 316 Z" fill="url(#vineGold)" fill-opacity="0.25" />
+    <circle cx="36" cy="306" r="2" fill="url(#vineGold)" />
+
+    <!-- Leaf cluster 6 (Y: 380) -->
+    <path d="M26 375 C42 368 48 382 30 386 Z" fill="url(#vineGold)" fill-opacity="0.3" />
+    <circle cx="46" cy="376" r="2.5" fill="url(#vineGold)" />
+
+    <!-- Leaf cluster 7 (Y: 450) -->
+    <path d="M12 445 C3 435 14 425 20 440 Z" fill="url(#vineGold)" fill-opacity="0.25" />
+    <path d="M16 455 C32 450 38 462 22 466 Z" fill="url(#vineGold)" fill-opacity="0.25" />
+
+    <!-- Leaf cluster 8 (Y: 530) -->
+    <path d="M21 525 C38 518 44 532 27 536 Z" fill="url(#vineGold)" fill-opacity="0.3" />
+    <circle cx="42" cy="526" r="2.5" fill="url(#vineGold)" />
+  </g>
+
+  <defs>
+    <linearGradient id="vineGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5d6" />
+      <stop offset="40%" stop-color="#e5bc54" />
+      <stop offset="80%" stop-color="#aa7c11" />
+      <stop offset="100%" stop-color="#ffd978" />
+    </linearGradient>
+  </defs>
+</svg>

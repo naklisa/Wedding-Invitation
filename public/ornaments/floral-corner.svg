@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Delicate corner botanical lily & leaves -->
+  <path d="M10,190 C30,140 70,100 130,80 C160,70 190,40 190,10" opacity="0.6"/>
+  <path d="M10,190 C60,160 110,140 150,110 C180,85 190,50 190,10" opacity="0.4"/>
+  <!-- Leaf 1 -->
+  <path d="M70,120 C60,100 70,80 90,85 C100,105 85,120 70,120 Z" opacity="0.5"/>
+  <!-- Leaf 2 -->
+  <path d="M110,95 C120,75 140,80 145,95 C135,115 115,110 110,95 Z" opacity="0.5"/>
+  <!-- Leaf 3 -->
+  <path d="M140,65 C130,45 150,40 165,50 C165,70 145,75 140,65 Z" opacity="0.5"/>
+  <!-- Lily Petals -->
+  <path d="M160,35 C170,15 190,10 185,30 C180,45 165,40 160,35 Z" opacity="0.7"/>
+  <path d="M145,25 C155,5 175,10 170,25 C165,40 150,35 145,25 Z" opacity="0.7"/>
+  <path d="M175,50 C195,45 200,60 185,65 C170,70 170,55 175,50 Z" opacity="0.6"/>
+  <!-- Tendril / Stamen -->
+  <path d="M165,30 Q175,20 180,18" opacity="0.8"/>
+  <circle cx="180" cy="18" r="1.5" fill="currentColor" opacity="0.8"/>
+  <path d="M160,32 Q168,15 172,12" opacity="0.8"/>
+  <circle cx="172" cy="12" r="1.5" fill="currentColor" opacity="0.8"/>
+  <!-- Small side bud -->
+  <path d="M40,155 C35,140 45,130 55,135 C60,145 50,160 40,155 Z" opacity="0.4"/>
+</svg>
