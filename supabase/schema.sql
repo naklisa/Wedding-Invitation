@@ -33,8 +33,12 @@ CREATE TABLE IF NOT EXISTS public.guests (
     phone TEXT,
     category TEXT DEFAULT 'Umum',
     is_sent BOOLEAN DEFAULT false,
+    slug TEXT UNIQUE,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Migration query if table already exists:
+-- ALTER TABLE public.guests ADD COLUMN IF NOT EXISTS slug TEXT UNIQUE;
 
 -- Enable RLS for guests
 ALTER TABLE public.guests ENABLE ROW LEVEL SECURITY;
@@ -56,3 +60,4 @@ ON public.guests FOR UPDATE TO public USING (true) WITH CHECK (true);
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_wishes_created_at ON public.wishes (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_guests_created_at ON public.guests (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_guests_slug ON public.guests (slug);

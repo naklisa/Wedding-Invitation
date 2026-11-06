@@ -26,5 +26,6 @@ export interface GuestEntry {
   phone?: string;
   category?: string;
   is_sent?: boolean;
+  slug?: string;
   created_at?: string;
 }

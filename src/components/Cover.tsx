@@ -8,12 +8,17 @@ import { weddingConfig } from "../lib/config";
 interface CoverProps {
   onOpen: () => void;
   isOpen: boolean;
+  initialGuestName?: string;
 }
 
-export default function Cover({ onOpen, isOpen }: CoverProps) {
-  const [guestName, setGuestName] = useState<string>("Tamu Undangan");
+export default function Cover({ onOpen, isOpen, initialGuestName }: CoverProps) {
+  const [guestName, setGuestName] = useState<string>(initialGuestName || "Tamu Undangan");
 
   useEffect(() => {
+    if (initialGuestName) {
+      setGuestName(initialGuestName);
+      return;
+    }
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const to = params.get("to") || params.get("nama") || params.get("guest");
@@ -21,7 +26,7 @@ export default function Cover({ onOpen, isOpen }: CoverProps) {
         setGuestName(to);
       }
     }
-  }, []);
+  }, [initialGuestName]);
 
   return (
     <div

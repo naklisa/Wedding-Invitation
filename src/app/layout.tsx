@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://df-wedding-invitation-flax.vercel.app"
+  ),
   title: "The Wedding of Dinda & Fidyan | 16.01.27",
   description: "Undangan Pernikahan Lina Dinda Aulia, S.Pd & Fidyan Aolani, S.M - Sabtu, 16 Januari 2027 di Pontang, Serang - Banten.",
   openGraph: {

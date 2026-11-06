@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import * as XLSX from "xlsx";
 import { supabase, isSupabaseConfigured, GuestEntry, RsvpEntry } from "../../lib/supabase";
+import { generateSlug, sanitizeSlug } from "../../lib/slug";
 
 export default function AdminPage() {
   // Authentication states
@@ -56,6 +57,8 @@ export default function AdminPage() {
   const [manualName, setManualName] = useState("");
   const [manualPhone, setManualPhone] = useState("");
   const [manualCategory, setManualCategory] = useState("Umum");
+  const [manualSlug, setManualSlug] = useState("");
+  const [isSlugManuallyEdited, setIsSlugManuallyEdited] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -171,10 +174,30 @@ export default function AdminPage() {
   // 1. Download Sample Excel Template
   const handleDownloadTemplate = () => {
     const templateData = [
-      { Nama: "Bpk. Hendra & Keluarga", No_WhatsApp: "6281234567890", Kategori: "VIP" },
-      { Nama: "Dimas Prasetyo", No_WhatsApp: "6285712345678", Kategori: "Teman Kantor" },
-      { Nama: "Sarah Amalia & Partner", No_WhatsApp: "6289912345678", Kategori: "Teman Kuliah" },
-      { Nama: "Keluarga Bpk. H. Ahmad", No_WhatsApp: "6282112345678", Kategori: "Keluarga" },
+      {
+        Nama: "Nahli Saud Ramdani",
+        No_WhatsApp: "081234567890",
+        Kategori: "VIP",
+        Slug: "nahli",
+      },
+      {
+        Nama: "Bpk. Hendra & Keluarga",
+        No_WhatsApp: "085712345678",
+        Kategori: "Keluarga",
+        Slug: "hendra",
+      },
+      {
+        Nama: "Dimas Prasetyo",
+        No_WhatsApp: "082112345678",
+        Kategori: "Teman Kantor",
+        Slug: "dimas",
+      },
+      {
+        Nama: "Sarah Amalia, S.Pd",
+        No_WhatsApp: "089912345678",
+        Kategori: "Teman Kuliah",
+        Slug: "sarah",
+      },
     ];
 
     const worksheet = XLSX.utils.json_to_sheet(templateData);
@@ -206,25 +229,50 @@ export default function AdminPage() {
           return;
         }
 
-        // Map column variations
-        const parsedGuests: GuestEntry[] = rawData
-          .map((row) => {
-            const name = row.Nama || row.nama || row.Name || row.name || row["Nama Tamu"] || "";
-            let phone = String(row.No_WhatsApp || row.no_whatsapp || row.WhatsApp || row.Phone || row.phone || row["No HP"] || "").replace(/\D/g, "");
-            if (phone.startsWith("0")) {
-              phone = "62" + phone.slice(1);
-            }
-            const category = row.Kategori || row.kategori || row.Category || "Umum";
+        const existingSlugs = new Set(
+          guests.map((g) => g.slug).filter(Boolean) as string[]
+        );
 
-            return {
-              name: String(name).trim(),
-              phone: phone || undefined,
-              category: String(category).trim(),
-              is_sent: false,
-              created_at: new Date().toISOString(),
-            };
-          })
-          .filter((g) => g.name.length > 0);
+        // Map column variations cleanly into GuestEntry[]
+        const parsedGuests: GuestEntry[] = [];
+        for (const row of rawData) {
+          const name = String(
+            row.Nama || row.nama || row.Name || row.name || row["Nama Tamu"] || ""
+          ).trim();
+          if (!name) continue;
+
+          let phone = String(
+            row.No_WhatsApp ||
+              row.no_whatsapp ||
+              row.WhatsApp ||
+              row.Phone ||
+              row.phone ||
+              row["No HP"] ||
+              ""
+          ).replace(/\D/g, "");
+          if (phone.startsWith("0")) {
+            phone = "62" + phone.slice(1);
+          }
+          const category = String(
+            row.Kategori || row.kategori || row.Category || "Umum"
+          ).trim();
+
+          const rawSlug = row.Slug || row.slug || row.Kode || row.kode;
+          let slug = rawSlug ? sanitizeSlug(String(rawSlug)) : "";
+          if (!slug) {
+            slug = generateSlug(name, existingSlugs);
+          }
+          existingSlugs.add(slug);
+
+          parsedGuests.push({
+            name,
+            phone: phone || undefined,
+            category,
+            slug,
+            is_sent: false,
+            created_at: new Date().toISOString(),
+          });
+        }
 
         if (parsedGuests.length === 0) {
           setImportMessage("Kolom 'Nama' tidak ditemukan di file Excel.");
@@ -278,10 +326,18 @@ export default function AdminPage() {
       phone = "62" + phone.slice(1);
     }
 
+    const existingSlugs = new Set(
+      guests.map((g) => g.slug).filter(Boolean) as string[]
+    );
+    const finalSlug = manualSlug.trim()
+      ? sanitizeSlug(manualSlug)
+      : generateSlug(manualName.trim(), existingSlugs);
+
     const newGuest: GuestEntry = {
       name: manualName.trim(),
       phone: phone || undefined,
       category: manualCategory,
+      slug: finalSlug,
       is_sent: false,
       created_at: new Date().toISOString(),
     };
@@ -309,6 +365,8 @@ export default function AdminPage() {
 
     setManualName("");
     setManualPhone("");
+    setManualSlug("");
+    setIsSlugManuallyEdited(false);
     setShowAddModal(false);
   };
 
@@ -370,17 +428,22 @@ export default function AdminPage() {
   };
 
   // Generate URL for guest
-  const getGuestLink = (guestName: string) => {
+  const getGuestLink = (guest: GuestEntry) => {
     if (typeof window !== "undefined") {
       const baseUrl = window.location.origin;
-      return `${baseUrl}/?to=${encodeURIComponent(guestName)}`;
+      if (guest.slug) {
+        return `${baseUrl}/to/${encodeURIComponent(guest.slug)}`;
+      }
+      return `${baseUrl}/?to=${encodeURIComponent(guest.name)}`;
     }
-    return `/?to=${encodeURIComponent(guestName)}`;
+    return guest.slug
+      ? `/to/${encodeURIComponent(guest.slug)}`
+      : `/?to=${encodeURIComponent(guest.name)}`;
   };
 
   // Generate WhatsApp Blast Message
   const sendWhatsApp = (guest: GuestEntry, index: number) => {
-    const link = getGuestLink(guest.name);
+    const link = getGuestLink(guest);
     const message = `Yth. ${guest.name},
 
 Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:
@@ -412,8 +475,8 @@ _Dinda & Fidyan_`;
   };
 
   // Copy Link to clipboard
-  const handleCopyLink = (guestName: string, id: string) => {
-    const link = getGuestLink(guestName);
+  const handleCopyLink = (guest: GuestEntry, id: string) => {
+    const link = getGuestLink(guest);
     navigator.clipboard.writeText(link);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
@@ -421,9 +484,11 @@ _Dinda & Fidyan_`;
 
   // Filtering calculations
   const filteredGuests = guests.filter((g) => {
+    const q = guestSearch.toLowerCase();
     const matchesSearch =
-      g.name.toLowerCase().includes(guestSearch.toLowerCase()) ||
-      (g.phone && g.phone.includes(guestSearch));
+      g.name.toLowerCase().includes(q) ||
+      (g.slug && g.slug.toLowerCase().includes(q)) ||
+      (g.phone && g.phone.includes(q));
     const matchesCategory = categoryFilter === "ALL" || g.category === categoryFilter;
     const matchesStatus =
       statusFilter === "ALL" ||
@@ -819,9 +884,14 @@ _Dinda & Fidyan_`;
                             </button>
                           </td>
 
-                          {/* Guest Name */}
+                          {/* Guest Name & Short Slug */}
                           <td className="py-3 px-4 font-medium text-white">
-                            {guest.name}
+                            <div>{guest.name}</div>
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              <span className="font-mono text-[10px] text-gold-400/90 bg-gold-400/10 px-1.5 py-0.5 rounded border border-gold-400/20">
+                                /to/{guest.slug || "link"}
+                              </span>
+                            </div>
                           </td>
 
                           {/* Category Badge */}
@@ -836,24 +906,35 @@ _Dinda & Fidyan_`;
                             {guest.phone || "-"}
                           </td>
 
-                          {/* Copy Link */}
+                          {/* Copy Link & Preview */}
                           <td className="py-3 px-4">
-                            <button
-                              onClick={() => handleCopyLink(guest.name, `guest-${idx}`)}
-                              className="flex items-center gap-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 px-2.5 py-1 text-[11px] text-slate-200 transition-colors"
-                            >
-                              {copiedId === `guest-${idx}` ? (
-                                <>
-                                  <Check className="h-3 w-3 text-emerald-400" />
-                                  <span className="text-emerald-400">Disalin!</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Copy className="h-3 w-3 text-gold-400" />
-                                  <span>Salin Link</span>
-                                </>
-                              )}
-                            </button>
+                            <div className="flex items-center gap-1.5">
+                              <button
+                                onClick={() => handleCopyLink(guest, `guest-${idx}`)}
+                                className="flex items-center gap-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 px-2.5 py-1 text-[11px] text-slate-200 transition-colors"
+                              >
+                                {copiedId === `guest-${idx}` ? (
+                                  <>
+                                    <Check className="h-3 w-3 text-emerald-400" />
+                                    <span className="text-emerald-400">Disalin!</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Copy className="h-3 w-3 text-gold-400" />
+                                    <span>Salin Link</span>
+                                  </>
+                                )}
+                              </button>
+                              <a
+                                href={getGuestLink(guest)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Buka undangan tamu ini di tab baru"
+                                className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-gold-400 border border-slate-700 transition-colors"
+                              >
+                                <ExternalLink className="h-3 w-3" />
+                              </a>
+                            </div>
                           </td>
 
                           {/* WhatsApp Blast Button */}
@@ -1053,10 +1134,41 @@ _Dinda & Fidyan_`;
                   type="text"
                   required
                   value={manualName}
-                  onChange={(e) => setManualName(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setManualName(val);
+                    if (!isSlugManuallyEdited) {
+                      const existingSlugs = new Set(
+                        guests.map((g) => g.slug).filter(Boolean) as string[]
+                      );
+                      setManualSlug(generateSlug(val, existingSlugs));
+                    }
+                  }}
                   placeholder="Contoh: Bpk. Rahmat & Keluarga"
                   className="w-full rounded-xl bg-slate-950 border border-slate-800 px-3 py-2 text-xs text-white focus:border-mauve-400 focus:outline-none"
                 />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase text-slate-300 mb-1 font-medium">
+                  Link Singkat (Slug)
+                </label>
+                <div className="flex items-center rounded-xl bg-slate-950 border border-slate-800 px-3 py-2 text-xs text-slate-400 focus-within:border-mauve-400">
+                  <span className="text-slate-500 font-mono">/to/</span>
+                  <input
+                    type="text"
+                    value={manualSlug}
+                    onChange={(e) => {
+                      setIsSlugManuallyEdited(true);
+                      setManualSlug(sanitizeSlug(e.target.value));
+                    }}
+                    placeholder="rahmat"
+                    className="w-full bg-transparent text-white font-mono focus:outline-none ml-1"
+                  />
+                </div>
+                <p className="text-[10px] text-slate-500 mt-1">
+                  Otomatis dibuat dari nama tamu (misal: /to/nahli). Bisa diganti custom jika perlu.
+                </p>
               </div>
 
               <div>

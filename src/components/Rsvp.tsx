@@ -33,14 +33,24 @@ const initialWishes: RsvpEntry[] = [
   },
 ];
 
-export default function Rsvp() {
+interface RsvpProps {
+  initialGuestName?: string;
+}
+
+export default function Rsvp({ initialGuestName }: RsvpProps = {}) {
   const [wishes, setWishes] = useState<RsvpEntry[]>(initialWishes);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(initialGuestName || "");
   const [status, setStatus] = useState<"hadir" | "tidak_hadir" | "ragu">("hadir");
   const [guestCount, setGuestCount] = useState<number>(1);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (initialGuestName && !name) {
+      setName(initialGuestName);
+    }
+  }, [initialGuestName]);
 
   // Load from Supabase or LocalStorage
   useEffect(() => {
