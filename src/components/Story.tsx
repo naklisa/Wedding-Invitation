@@ -38,9 +38,9 @@ export default function Story() {
                 <h4 className="font-serif text-base sm:text-lg font-semibold text-white">
                   {story.title}
                 </h4>
-                <p className="text-xs text-mauve-100 font-light leading-relaxed">
+                <div className="text-xs text-mauve-100/95 font-light leading-relaxed whitespace-pre-line space-y-2 pt-1 font-sans">
                   {story.description}
-                </p>
+                </div>
               </div>
             </div>
           ))}
