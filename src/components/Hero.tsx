@@ -70,7 +70,7 @@ export default function Hero() {
           <p className="font-cinzel text-xs uppercase tracking-[0.3em] text-gold-200/90 font-medium">
             The Wedding of
           </p>
-          <h1 className="font-serif text-4xl sm:text-5xl font-normal text-gold-gradient drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)]">
+          <h1 className="font-serif text-4xl sm:text-5xl font-normal text-gold-gradient drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
             Dinda &amp; Fidyan
           </h1>
           <p className="font-script text-2xl sm:text-3xl text-gold-200 drop-shadow">

@@ -97,19 +97,19 @@ export const weddingConfig: WeddingConfig = {
   banks: [
     {
       bankName: "BCA",
-      accountNumber: "7825123490",
-      accountHolder: "Lina Dinda Aulia",
+      accountNumber: "2453497143",
+      accountHolder: "Fidyan Aolani",
     },
     {
-      bankName: "BNI",
-      accountNumber: "0839218273",
-      accountHolder: "Fidyan Aolani",
+      bankName: "DANA",
+      accountNumber: "08551744591",
+      accountHolder: "Lina Dinda Aulia",
     },
   ],
   giftAddress: {
     recipient: "Lina Dinda Aulia & Fidyan Aolani",
     address: "Jl. KH. Syanwani RT. 02 RW. 01 Kp. Kelapian Ds. Kelapian Kec. Pontang, Serang - Banten (MTs. Al-khairiyah Kelapian)",
-    phone: "081234567890",
+    phone: "0858-8194-8782",
   },
   familyClosing: "Keluarga Besar Bpk. H. Suhali (Alm.) & Bpk. Sahroni",
   stories: [
@@ -149,9 +149,9 @@ Hari itu, Dinda bukan lagi sekadar perempuan yang dilihat setiap pagi dari kejau
     {
       title: "Hari Bahagia",
       date: "HARI BAHAGIA",
-      description: `Sebelas tahun.
+      description: `16 Januari 2027.
 
-Sebelas tahun kami dipisahkan oleh waktu, oleh jarak, oleh cerita yang tak pernah selesai. Kami pernah menjadi dua orang asing yang berjalan di jalan yang berbeda, tanpa tahu bahwa takdir sedang diam-diam menuliskan ulang pertemuan kami.
+Sebelas tahun kami dipisahkan oleh waktu, kami pernah menjadi dua orang asing yang berjalan di jalan yang berbeda, tanpa tahu bahwa takdir sedang diam-diam menuliskan ulang pertemuan kami.
 
 Dan kini, setelah 11 tahun berpisah, kami dipertemukan kembali. Bukan kebetulan. Ini adalah takdir yang paling indah.
 

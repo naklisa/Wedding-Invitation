@@ -95,7 +95,7 @@ export default function Cover({ onOpen, isOpen, initialGuestName }: CoverProps) 
             <h1 className="font-serif text-4xl sm:text-5xl font-normal tracking-wide text-gold-gradient drop-shadow-lg">
               Dinda &amp; Fidyan
             </h1>
-            <p className="font-script text-2xl text-gold-200/90 drop-shadow">
+            <p className="font-serif text-sm sm:text-base tracking-[0.14em] text-gold-200 drop-shadow font-medium pt-1">
               Lina Dinda Aulia &amp; Fidyan Aolani
             </p>
           </div>

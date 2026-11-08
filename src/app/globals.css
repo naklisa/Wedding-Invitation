@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     --background: #6e4653;
     --foreground: #ffffff;
   }
@@ -21,11 +22,10 @@
   }
 }
 
-/* Luxurious Gradient Text (Metallic Gold) */
+/* Luxurious Solid & Radiant Gold (100% consistent across all devices & Android Dark Mode) */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #fff7d6 0%, #eac265 40%, #c49430 75%, #fff2be 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #f7df94;
+  text-shadow: 0 0 18px rgba(243, 203, 101, 0.45);
   display: inline-block;
 }
 

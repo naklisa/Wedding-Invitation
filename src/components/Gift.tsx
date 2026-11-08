@@ -54,55 +54,68 @@ export default function Gift() {
           </p>
         </div>
 
-        {/* Bank Cards */}
+        {/* Bank & E-Wallet Cards */}
         <div className="space-y-4 pt-1">
-          {banks.map((bank, idx) => (
-            <div
-              key={idx}
-              className="luxury-card-gold rounded-3xl p-6 border border-gold-300/40 shadow-2xl space-y-4 text-left relative overflow-hidden"
-            >
-              {/* Metallic Chip & Bank Logo */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="h-6 w-9 rounded-md bg-gradient-to-tr from-amber-400 via-yellow-200 to-amber-500 border border-amber-300/60 shadow-sm" />
-                  <span className="font-serif font-bold text-sm tracking-widest text-gold-200 uppercase">
-                    Bank {bank.bankName}
-                  </span>
-                </div>
-                <CreditCard className="h-5 w-5 text-gold-300 opacity-80" />
-              </div>
+          {banks.map((bank, idx) => {
+            const isEWallet =
+              bank.bankName.toLowerCase().includes("dana") ||
+              bank.bankName.toLowerCase().includes("ewallet") ||
+              bank.bankName.toLowerCase().includes("e-wallet") ||
+              bank.bankName.toLowerCase().includes("gopay") ||
+              bank.bankName.toLowerCase().includes("ovo");
 
-              {/* Account Number */}
-              <div className="space-y-1 py-1">
-                <p className="font-mono text-2xl sm:text-3xl font-bold tracking-wider text-white drop-shadow">
-                  {bank.accountNumber}
-                </p>
-                <p className="text-xs text-mauve-200 font-light">
-                  Atas Nama: <span className="font-semibold text-gold-100">{bank.accountHolder}</span>
-                </p>
-              </div>
+            const labelTitle = isEWallet ? `E-Wallet ${bank.bankName}` : `Bank ${bank.bankName}`;
+            const copyText = isEWallet ? `Salin Nomor ${bank.bankName}` : "Salin Nomor Rekening";
+            const copiedText = isEWallet ? `Nomor ${bank.bankName} Disalin!` : "Nomor Rekening Disalin!";
 
-              {/* Copy Button */}
-              <button
-                onClick={() => handleCopy(bank.accountNumber, `bank-${idx}`)}
-                className="w-full flex items-center justify-center gap-2 rounded-2xl bg-black/40 hover:bg-black/60 active:scale-98 py-3 px-4 text-xs font-medium text-white border border-gold-300/30 transition-all shadow-md group"
+            return (
+              <div
+                key={idx}
+                className="luxury-card-gold rounded-3xl p-6 border border-gold-300/40 shadow-2xl space-y-4 text-left relative overflow-hidden"
               >
-                {copiedKey === `bank-${idx}` ? (
-                  <>
-                    <Check className="h-4 w-4 text-emerald-400" />
-                    <span className="text-emerald-300 font-semibold font-cinzel">Nomor Rekening Disalin!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="h-4 w-4 text-gold-300 group-hover:scale-110 transition-transform" />
-                    <span className="font-cinzel tracking-wider uppercase text-[11px] font-semibold text-gold-200">
-                      Salin Nomor Rekening
+                {/* Metallic Chip & Bank/E-Wallet Label */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-6 w-9 rounded-md bg-gradient-to-tr from-amber-400 via-yellow-200 to-amber-500 border border-amber-300/60 shadow-sm" />
+                    <span className="font-serif font-bold text-sm tracking-widest text-gold-200 uppercase">
+                      {labelTitle}
                     </span>
-                  </>
-                )}
-              </button>
-            </div>
-          ))}
+                  </div>
+                  <CreditCard className="h-5 w-5 text-gold-300 opacity-80" />
+                </div>
+
+                {/* Account / Phone Number */}
+                <div className="space-y-1 py-1">
+                  <p className="font-mono text-2xl sm:text-3xl font-bold tracking-wider text-white drop-shadow">
+                    {bank.accountNumber}
+                  </p>
+                  <p className="text-xs text-mauve-200 font-light">
+                    Atas Nama: <span className="font-semibold text-gold-100">{bank.accountHolder}</span>
+                  </p>
+                </div>
+
+                {/* Copy Button */}
+                <button
+                  onClick={() => handleCopy(bank.accountNumber.trim(), `bank-${idx}`)}
+                  className="w-full flex items-center justify-center gap-2 rounded-2xl bg-black/40 hover:bg-black/60 active:scale-98 py-3 px-4 text-xs font-medium text-white border border-gold-300/30 transition-all shadow-md group"
+                >
+                  {copiedKey === `bank-${idx}` ? (
+                    <>
+                      <Check className="h-4 w-4 text-emerald-400" />
+                      <span className="text-emerald-300 font-semibold font-cinzel">{copiedText}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-4 w-4 text-gold-300 group-hover:scale-110 transition-transform" />
+                      <span className="font-cinzel tracking-wider uppercase text-[11px] font-semibold text-gold-200">
+                        {copyText}
+                      </span>
+                    </>
+                  )}
+                </button>
+              </div>
+            );
+          })}
         </div>
 
         {/* Kirim Kado Fisik */}
